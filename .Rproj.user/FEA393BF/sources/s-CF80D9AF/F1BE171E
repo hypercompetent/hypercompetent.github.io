@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1514655687898.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "F1BE171E",
+    "lastKnownWriteTime" : 1514655687,
+    "last_content_update" : 1514655687,
+    "path" : "~/R/hypercompetent.github.io/content/post/2015-07-23-r-rmarkdown.Rmd",
+    "project_path" : "content/post/2015-07-23-r-rmarkdown.Rmd",
+    "properties" : {
+        "cursorPosition" : "17,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

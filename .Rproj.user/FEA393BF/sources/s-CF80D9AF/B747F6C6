@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1514655744654.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "B747F6C6",
+    "lastKnownWriteTime" : 1514655888,
+    "last_content_update" : 1514655888544,
+    "path" : "~/R/hypercompetent.github.io/config.toml",
+    "project_path" : "config.toml",
+    "properties" : {
+        "cursorPosition" : "10,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "toml"
+}
