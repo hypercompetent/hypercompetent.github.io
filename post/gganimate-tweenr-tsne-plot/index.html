@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="author" content="Lucas Graybuck">
+  <meta name="description" content="Scientist I">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/gganimate-tweenr-tsne-plot/">
+
+  
+  
+
+
+  
+
+  
+  
+  
+  
+    
+  
+  
+    
+    
+      
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+      
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.1/css/academicons.min.css" integrity="sha512-NThgw3XKQ1absAahW6to7Ey42uycrVvfNfyjqcFNgCmOCQ5AR4AO0SiXrN+8ZtYeappp56lk1WtvjVmEa+VR6A==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  
+  
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-111763864-1', 'auto');
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="The Plottery Barn">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="The Plottery Barn">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/gganimate-tweenr-tsne-plot/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@hypercompetent">
+  <meta property="twitter:creator" content="@hypercompetent">
+  
+  <meta property="og:site_name" content="The Plottery Barn">
+  <meta property="og:url" content="/post/gganimate-tweenr-tsne-plot/">
+  <meta property="og:title" content="Using gganimate and tweenr to animate a tSNE plot | The Plottery Barn">
+  <meta property="og:description" content="">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2017-12-31T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2017-12-31T00:00:00&#43;00:00">
+  
+
+  
+
+  <title>Using gganimate and tweenr to animate a tSNE plot | The Plottery Barn</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/">The Plottery Barn</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>About</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#publications">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <div class="article-inner">
+      <h1 itemprop="name">Using gganimate and tweenr to animate a tSNE plot</h1>
+
+      
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+    <time datetime="2017-12-31 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      2017-12-31
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Lucas Graybuck">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    9 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Using%20gganimate%20and%20tweenr%20to%20animate%20a%20tSNE%20plot&amp;url=%2fpost%2fgganimate-tweenr-tsne-plot%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2fgganimate-tweenr-tsne-plot%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fgganimate-tweenr-tsne-plot%2f&amp;title=Using%20gganimate%20and%20tweenr%20to%20animate%20a%20tSNE%20plot"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2fgganimate-tweenr-tsne-plot%2f&amp;title=Using%20gganimate%20and%20tweenr%20to%20animate%20a%20tSNE%20plot"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Using%20gganimate%20and%20tweenr%20to%20animate%20a%20tSNE%20plot&amp;body=%2fpost%2fgganimate-tweenr-tsne-plot%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+      <div class="article-style" itemprop="articleBody">
+        <p>I recently posted a GIF of our <a href="https://www.biorxiv.org/content/early/2017/12/06/229542">new transcriptomics clustering</a> in the form of a tSNE plot, which appears to resolve from a cloud of random points into a nice, orderly structure:</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Fun with gganimate and tweenr while I wait for our ms to get through <a href="https://twitter.com/biorxivpreprint?ref_src=twsrc%5Etfw">@biorxivpreprint</a> screening. <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> <a href="https://twitter.com/hashtag/gganimate?src=hash&amp;ref_src=twsrc%5Etfw">#gganimate</a> <a href="https://twitter.com/hashtag/tsne?src=hash&amp;ref_src=twsrc%5Etfw">#tsne</a> <a href="https://t.co/5OvRuQGbhw">pic.twitter.com/5OvRuQGbhw</a></p>&mdash; Lucas Graybuck (@hypercompetent) <a href="https://twitter.com/hypercompetent/status/938559797925789698?ref_src=twsrc%5Etfw">December 7, 2017</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>Below, I’ll show how this was built with the help of <em>gganimate</em>, <em>tweenr</em>, and of course <em>ggplot2</em> in R. The main gist of the process is that we need to set up several states for the points to shift between, which the <em>tweenr</em> package will interpolate to generate all of the positions in each frame, and then the <em>gganimate</em> package (along with <a href="https://www.imagemagick.org/">ImageMagick</a> if you’d like to make a GIF) can be used to build an animation.</p>
+<p>To get started, you’ll need to download <em>gganimate</em> and <em>tweenr</em> from Github using the <em>devtools</em> package:</p>
+<pre class="r"><code>if (!require(devtools)) {
+    install.packages(&quot;devtools&quot;)
+}
+if (!require(gganimate)) {
+  devtools::install_github(&quot;dgrtwo/gganimate&quot;)
+}
+if (!require(tweenr)) {
+  devtools::install_github(&quot;thomasp85/tweenr&quot;)
+}</code></pre>
+<p>In addition to these packages, I’ll also use <em>dplyr</em> for data manipulation, <em>ggplot2</em> for plotting, and <em>data.table</em> to quickly read the data from .csv.</p>
+<pre class="r"><code>library(dplyr)
+library(ggplot2)
+library(gganimate)
+library(tweenr)
+library(data.table)</code></pre>
+<p>In this demo, I’ll be starting with tSNE coordinates and cluster labels for each point that we’ve generated previously. These can be retrieved from Github:</p>
+<pre class="r"><code>tsne_dims &lt;- fread(&quot;https://github.com/hypercompetent/plottery_barn_data/raw/master/gganimate-tweenr-tsne-plot/tsne_dims.csv&quot;)
+
+head(tsne_dims)</code></pre>
+<pre><code>##             sample_id cluster_id cluster_color    tsne_x     tsne_y
+## 1: LS-14690_S02_E1-50         35       #994C00  25.07267 -2.7706899
+## 2: LS-14690_S03_E1-50         56       #00979D -39.18723 20.9199491
+## 3: LS-14690_S05_E1-50         56       #00979D -44.35434 12.0985906
+## 4: LS-14690_S06_E1-50         56       #00979D -42.82413 21.0532487
+## 5: LS-14690_S07_E1-50         56       #00979D -42.08457  0.6795734
+## 6: LS-14690_S08_E1-50         56       #00979D -41.15694 13.0337231</code></pre>
+<pre class="r"><code>ggplot() +
+  geom_point(data = tsne_dims,
+             aes(x = tsne_x,
+                 y = tsne_y,
+                 color = cluster_color)) +
+  scale_color_identity() +
+  theme_void()</code></pre>
+<p><img src="/post/2017-12-31-gganimate-tweenr-tsne-plot_files/figure-html/get_tsne-1.png" width="480" /></p>
+<p>At the beginning of the animation, I’d like all of the points to start in a random position, and come into focus in their tSNE positions. This function will generate random positions for <code>num_points</code> distributed over the surface of a disc with the given <code>disc_radius</code>.</p>
+<pre class="r"><code>random_disc_jitter &lt;- function(num_points,
+                               disc_radius,
+                               random_seed = 42) {
+  
+  if(!is.null(random_seed)) {
+    set.seed(random_seed)
+  }
+  
+  # Random radius positions
+  r &lt;- runif(num_points, 0, disc_radius ^ 2)
+  # Random angles
+  t &lt;- runif(num_points, 0, 2 * pi)
+  
+  # Convert radius and angles to cartesian coordinates
+  data.frame(x = sqrt(r) * cos(t),
+             y = sqrt(r) * sin(t))
+}</code></pre>
+<p>I’ll use <em>dplyr</em>’s <code>mutate()</code> to add this to the <code>tsne_dims</code> data:</p>
+<pre class="r"><code># Get the max x or y value from the tsne dims.
+# I&#39;ll use this for the radius
+max_tsne &lt;- max(abs(c(tsne_dims$tsne_x, tsne_dims$tsne_y)))
+
+tsne_dims &lt;- tsne_dims %&gt;%
+  mutate(random_x = random_disc_jitter(num_points = n(),
+                                       disc_radius = max_tsne)$x,
+         random_y = random_disc_jitter(num_points = n(),
+                                       disc_radius = max_tsne)$y)
+
+head(tsne_dims)</code></pre>
+<pre><code>##            sample_id cluster_id cluster_color    tsne_x     tsne_y
+## 1 LS-14690_S02_E1-50         35       #994C00  25.07267 -2.7706899
+## 2 LS-14690_S03_E1-50         56       #00979D -39.18723 20.9199491
+## 3 LS-14690_S05_E1-50         56       #00979D -44.35434 12.0985906
+## 4 LS-14690_S06_E1-50         56       #00979D -42.82413 21.0532487
+## 5 LS-14690_S07_E1-50         56       #00979D -42.08457  0.6795734
+## 6 LS-14690_S08_E1-50         56       #00979D -41.15694 13.0337231
+##    random_x   random_y
+## 1  52.58733  10.462040
+## 2 -54.22300  -2.175301
+## 3 -24.48068  17.318257
+## 4  32.24114  39.626810
+## 5 -16.53971 -41.751597
+## 6  31.92132  24.745645</code></pre>
+<pre class="r"><code>ggplot() +
+  geom_point(data = tsne_dims,
+             aes(x = random_x,
+                 y = random_y,
+                 color = cluster_color)) +
+  scale_color_identity() +
+  theme_void()</code></pre>
+<p><img src="/post/2017-12-31-gganimate-tweenr-tsne-plot_files/figure-html/unnamed-chunk-1-1.png" width="480" /></p>
+<p>For the final state in the animation, I’d like the points to gather around their cluster centroids. A nice way to densely pack points is with <a href="https://en.wikipedia.org/wiki/Fermat%27s_spiral">Fermat’s spiral</a>. Thanks to a <a href="https://stackoverflow.com/questions/26141237/how-to-create-phyllotaxis-spirals-with-r/28309226#28309226">StackOverflow reply</a> by user <a href="https://stackoverflow.com/users/4526127/manish-nag">Manish Nag</a>, I was able to write a function to arrange points along this spiral.</p>
+<p>This function will generate coordinates for <code>num_points</code> around a central position (<code>center_x</code> and <code>center_y</code>), and return x and y coordinates for spiral positioning in a circle with radius supplied by the <code>size</code> argument. I’ll use this to generate positions for the third phase of the plot, which gathers the points around the centroid for each cluster.</p>
+<pre class="r"><code>fermat_jitter &lt;- function(num_points, 
+                          size, 
+                          center_x, 
+                          center_y) {
+  
+  golden_ratio &lt;- (sqrt(5) + 1) / 2
+  fibonacci_angle &lt;- 360 / (golden_ratio ^ 2)
+  
+  circle_r &lt;- sqrt(size / num_points)
+  
+  x &lt;- rep(center_x, num_points)
+  y &lt;- rep(center_y, num_points)
+  
+  
+  for (m in 1:(num_points - 1)) {
+    n &lt;- m - 1
+    r &lt;- circle_r * sqrt(n)
+    theta &lt;- fibonacci_angle * (n)
+    x[n] &lt;- center_x + r * cos(theta)
+    y[n] &lt;- center_y + r * sin(theta)
+    
+  }
+  
+  data.frame(x = x, 
+             y = y)
+  
+}</code></pre>
+<p>To generate these for the plot, I’ll use <em>dplyr</em>’s <code>group_by()</code> function to find the centroid of each cluster in tSNE coordinates, then jitter around the centroids using the <code>fermat_jitter()</code> function.</p>
+<pre class="r"><code># Some trial and error for this value to find a size that packs the points without getting
+# too much overlap
+max_size &lt;- 16
+# We&#39;ll also need the max cluster n to scale the jitter radius
+max_n &lt;- max(table(tsne_dims$cluster_id))
+
+tsne_dims &lt;- tsne_dims %&gt;%
+  group_by(cluster_id) %&gt;%
+  mutate(centroid_x = mean(tsne_x, trim = 0.5),
+         centroid_y = mean(tsne_y, trim = 0.5)) %&gt;%
+  mutate(fermat_x = fermat_jitter(num_points = n(),
+                                  size = max_size * n() / max_n,
+                                  center_x = centroid_x[1],
+                                  center_y = centroid_y[1])$x,
+         fermat_y = fermat_jitter(num_points = n(),
+                                  size = max_size * n() / max_n,
+                                  center_x = centroid_x[1],
+                                  center_y = centroid_y[1])$y) %&gt;%
+  ungroup()
+
+head(tsne_dims)</code></pre>
+<pre><code>## # A tibble: 6 x 11
+##   sampl~ clust~ clus~ tsne~  tsne_y rand~ rando~ cent~ centr~ ferm~ ferma~
+##   &lt;chr&gt;   &lt;int&gt; &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 LS-14~     35 #994~  25.1 - 2.77   52.6  10.5   25.5 - 4.84  25.6 - 4.91
+## 2 LS-14~     56 #009~ -39.2  20.9   -54.2 - 2.18 -42.7  12.4  -42.6  12.3 
+## 3 LS-14~     56 #009~ -44.4  12.1   -24.5  17.3  -42.7  12.4  -42.7  12.2 
+## 4 LS-14~     56 #009~ -42.8  21.1    32.2  39.6  -42.7  12.4  -42.8  12.2 
+## 5 LS-14~     56 #009~ -42.1   0.680 -16.5 -41.8  -42.7  12.4  -42.9  12.3 
+## 6 LS-14~     56 #009~ -41.2  13.0    31.9  24.7  -42.7  12.4  -42.9  12.5</code></pre>
+<pre class="r"><code>ggplot() +
+  geom_point(data = tsne_dims,
+             aes(x = fermat_x,
+                 y = fermat_y,
+                 color = cluster_color)) +
+  scale_color_identity() +
+  theme_void()</code></pre>
+<p><img src="/post/2017-12-31-gganimate-tweenr-tsne-plot_files/figure-html/unnamed-chunk-2-1.png" width="480" /></p>
+<p>For <em>gganimate</em> and <em>tweenr</em>, I’ll need these to be separate data frames with matching column names.</p>
+<pre class="r"><code>state_1 &lt;- data.frame(x = tsne_dims$random_x,
+                      y = tsne_dims$random_y,
+                      color = tsne_dims$cluster_color)
+
+state_2 &lt;- data.frame(x = tsne_dims$tsne_x,
+                      y = tsne_dims$tsne_y,
+                      color = tsne_dims$cluster_color)
+
+state_3 &lt;- data.frame(x = tsne_dims$fermat_x,
+                      y = tsne_dims$fermat_y,
+                      color = tsne_dims$cluster_color)</code></pre>
+<p>Now, <em>tweenr</em> can be used for interpolation. To get a round-trip animation, I’ll build a list of states that goes from 1 -&gt; 2 -&gt; 3 -&gt; 2 -&gt; 1. The “cubic-in-out” option for the <code>ease</code> parameter applies some acceleration to the points at the beginning and end of each transition, which makes it look smoother.</p>
+<pre class="r"><code>state_list &lt;- list(state_1, state_2, state_3, state_2, state_1)
+
+tweened_states &lt;- tween_states(state_list, 
+                               tweenlength = 2, 
+                               statelength = 1,
+                               ease = &quot;cubic-in-out&quot;,
+                               nframes = 96)</code></pre>
+<p>Then, the plot can be assembled with the <code>frame</code> aesthetic, which will be used by <em>gganimate</em> to build the animation.</p>
+<pre class="r"><code>tweened_plot &lt;- ggplot(data = tweened_states, 
+                       aes(x = x, 
+                           y = y)) +
+  geom_point(aes(frame = .frame, 
+                 color = color), 
+             size = 1) +
+  scale_color_identity() +
+  theme_void()</code></pre>
+<pre><code>## Warning: Ignoring unknown aesthetics: frame</code></pre>
+<p>Finally, <em>gganimate</em> can be used to build a GIF of the animation.</p>
+<p>Side note: In order to get GIF output (at least on Windows, which is where I’m using this), you’ll need ImageMagick. The easiest way I’ve found to get this to work is to get the portable version of ImageMagick. I installed this at C:/ImageMagick/, which I need to add to the <code>R PATH</code> to get <em>gganimate</em> to work.</p>
+<pre class="r"><code>Sys.setenv(PATH = paste(&quot;C:/ImageMagick/&quot;,
+                        Sys.getenv(&quot;PATH&quot;), 
+                        sep = &quot;;&quot;))
+
+gganimate(tweened_plot, 
+          &quot;tsne_to_centroids.gif&quot;, 
+          ani.width = 300, 
+          ani.height = 300, 
+          interval = 1/8, 
+          title_frame = F)</code></pre>
+<pre><code>## Executing: 
+## &quot;convert -loop 0 -delay 12.5 Rplot1.png Rplot2.png Rplot3.png
+##     Rplot4.png Rplot5.png Rplot6.png Rplot7.png Rplot8.png
+##     Rplot9.png Rplot10.png Rplot11.png Rplot12.png Rplot13.png
+##     Rplot14.png Rplot15.png Rplot16.png Rplot17.png Rplot18.png
+##     Rplot19.png Rplot20.png Rplot21.png Rplot22.png Rplot23.png
+##     Rplot24.png Rplot25.png Rplot26.png Rplot27.png Rplot28.png
+##     Rplot29.png Rplot30.png Rplot31.png Rplot32.png Rplot33.png
+##     Rplot34.png Rplot35.png Rplot36.png Rplot37.png Rplot38.png
+##     Rplot39.png Rplot40.png Rplot41.png Rplot42.png Rplot43.png
+##     Rplot44.png Rplot45.png Rplot46.png Rplot47.png Rplot48.png
+##     Rplot49.png Rplot50.png Rplot51.png Rplot52.png Rplot53.png
+##     Rplot54.png Rplot55.png Rplot56.png Rplot57.png Rplot58.png
+##     Rplot59.png Rplot60.png Rplot61.png Rplot62.png Rplot63.png
+##     Rplot64.png Rplot65.png Rplot66.png Rplot67.png Rplot68.png
+##     Rplot69.png Rplot70.png Rplot71.png Rplot72.png Rplot73.png
+##     Rplot74.png Rplot75.png Rplot76.png Rplot77.png Rplot78.png
+##     Rplot79.png Rplot80.png Rplot81.png Rplot82.png Rplot83.png
+##     Rplot84.png Rplot85.png Rplot86.png Rplot87.png Rplot88.png
+##     Rplot89.png Rplot90.png Rplot91.png Rplot92.png Rplot93.png
+##     Rplot94.png Rplot95.png Rplot96.png Rplot97.png Rplot98.png
+##     Rplot99.png Rplot100.png &quot;tsne_to_centroids.gif&quot;&quot;</code></pre>
+<pre><code>## Output at: tsne_to_centroids.gif</code></pre>
+<div class="figure">
+<img src="../../files/images/tsne_to_centroids.gif" />
+
+</div>
+<p>And that’s it! Note that the plot can be made smoother and clearer by making a larger version (increase <code>nframes</code> in <code>tween_states()</code>, and increase <code>ani.width</code> and <code>ani.height</code> in <code>gganimate()</code>) at the expense of more time to generate the additional frames, and a larger final file size.</p>
+<p>Below is all of the code together in one section.</p>
+<pre class="r"><code>library(dplyr)
+library(ggplot2)
+library(gganimate)
+library(tweenr)
+library(data.table)
+
+## tSNE dimensions
+tsne_dims &lt;- fread(&quot;https://github.com/hypercompetent/plottery_barn_data/raw/master/gganimate-tweenr-tsne-plot/tsne_dims.csv&quot;)
+
+head(tsne_dims)
+
+ggplot() +
+  geom_point(data = tsne_dims,
+             aes(x = tsne_x,
+                 y = tsne_y,
+                 color = cluster_color)) +
+  scale_color_identity() +
+  theme_void()
+
+## Random dimensions
+random_disc_jitter &lt;- function(num_points,
+                               disc_radius,
+                               random_seed = 42) {
+  
+  if(!is.null(random_seed)) {
+    set.seed(random_seed)
+  }
+  
+  # Random radius positions
+  r &lt;- runif(num_points, 0, disc_radius ^ 2)
+  # Random angles
+  t &lt;- runif(num_points, 0, 2 * pi)
+  
+  # Convert radius and angles to cartesian coordinates
+  data.frame(x = sqrt(r) * cos(t),
+             y = sqrt(r) * sin(t))
+}
+
+# Get the max x or y value from the tsne dims.
+# I&#39;ll use this for the radius
+max_tsne &lt;- max(abs(c(tsne_dims$tsne_x, tsne_dims$tsne_y)))
+
+tsne_dims &lt;- tsne_dims %&gt;%
+  mutate(random_x = random_disc_jitter(num_points = n(),
+                                       disc_radius = max_tsne)$x,
+         random_y = random_disc_jitter(num_points = n(),
+                                       disc_radius = max_tsne)$y)
+
+head(tsne_dims)
+
+ggplot() +
+  geom_point(data = tsne_dims,
+             aes(x = random_x,
+                 y = random_y,
+                 color = cluster_color)) +
+  scale_color_identity() +
+  theme_void()
+
+## Fermat spiral dimensions
+fermat_jitter &lt;- function(num_points, 
+                          size, 
+                          center_x, 
+                          center_y) {
+  
+  golden_ratio &lt;- (sqrt(5) + 1) / 2
+  fibonacci_angle &lt;- 360 / (golden_ratio ^ 2)
+  
+  circle_r &lt;- sqrt(size / num_points)
+  
+  x &lt;- rep(center_x, num_points)
+  y &lt;- rep(center_y, num_points)
+  
+  
+  for (m in 1:(num_points - 1)) {
+    n &lt;- m - 1
+    r &lt;- circle_r * sqrt(n)
+    theta &lt;- fibonacci_angle * (n)
+    x[n] &lt;- center_x + r * cos(theta)
+    y[n] &lt;- center_y + r * sin(theta)
+    
+  }
+  
+  data.frame(x = x, 
+             y = y)
+  
+}
+
+# Some trial and error for this value to find a size that packs the points without getting
+# too much overlap
+max_size &lt;- 16
+# We&#39;ll also need the max cluster n to scale the jitter radius
+max_n &lt;- max(table(tsne_dims$cluster_id))
+
+tsne_dims &lt;- tsne_dims %&gt;%
+  group_by(cluster_id) %&gt;%
+  mutate(centroid_x = mean(tsne_x, trim = 0.5),
+         centroid_y = mean(tsne_y, trim = 0.5)) %&gt;%
+  mutate(fermat_x = fermat_jitter(num_points = n(),
+                                  size = max_size * n() / max_n,
+                                  center_x = centroid_x[1],
+                                  center_y = centroid_y[1])$x,
+         fermat_y = fermat_jitter(num_points = n(),
+                                  size = max_size * n() / max_n,
+                                  center_x = centroid_x[1],
+                                  center_y = centroid_y[1])$y) %&gt;%
+  ungroup()
+
+head(tsne_dims)
+
+ggplot() +
+  geom_point(data = tsne_dims,
+             aes(x = fermat_x,
+                 y = fermat_y,
+                 color = cluster_color)) +
+  scale_color_identity() +
+  theme_void()
+
+## Build the animation
+state_1 &lt;- data.frame(x = tsne_dims$random_x,
+                      y = tsne_dims$random_y,
+                      color = tsne_dims$cluster_color)
+
+state_2 &lt;- data.frame(x = tsne_dims$tsne_x,
+                      y = tsne_dims$tsne_y,
+                      color = tsne_dims$cluster_color)
+
+state_3 &lt;- data.frame(x = tsne_dims$fermat_x,
+                      y = tsne_dims$fermat_y,
+                      color = tsne_dims$cluster_color)
+
+state_list &lt;- list(state_1, state_2, state_3, state_2, state_1)
+
+tweened_states &lt;- tween_states(state_list, 
+                               tweenlength = 2, 
+                               statelength = 1,
+                               ease = &quot;cubic-in-out&quot;,
+                               nframes = 96)
+
+tweened_plot &lt;- ggplot(data = tweened_states, 
+                       aes(x = x, 
+                           y = y)) +
+  geom_point(aes(frame = .frame, 
+                 color = color), 
+             size = 1) +
+  scale_color_identity() +
+  theme_void()
+
+# May need to set the path
+
+#Sys.setenv(PATH = paste(&quot;C:/ImageMagick/&quot;,
+#                        Sys.getenv(&quot;PATH&quot;), 
+#                        sep = &quot;;&quot;))
+
+gganimate(tweened_plot, 
+          &quot;tsne_to_centroids.gif&quot;, 
+          ani.width = 300, 
+          ani.height = 300, 
+          interval = 1/8, 
+          title_frame = F)</code></pre>
+
+      </div>
+
+      
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="/tags/r">R</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/visualization">visualization</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/tsne">tSNE</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/clustering">clustering</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/gganimate">gganimate</a>
+  
+</div>
+
+
+
+    </div>
+  </div>
+
+</article>
+
+
+
+
+
+
+<div class="article-container">
+  
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2018 &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    
+    
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+      
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+
+  </body>
+</html>
+
