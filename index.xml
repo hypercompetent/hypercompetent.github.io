@@ -55,7 +55,7 @@ head(tsne_dims)&lt;/code&gt;&lt;/pre&gt;
                  color = cluster_color)) +
   scale_color_identity() +
   theme_void()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2017-12-31-gganimate-ing-a-tsne-plot_files/figure-html/get_tsne-1.png&#34; width=&#34;480&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-12-31-gganimate-tweenr-tsne-plot_files/figure-html/get_tsne-1.png&#34; width=&#34;480&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;At the beginning of the animation, I’d like all of the points to start in a random position, and come into focus in their tSNE positions. This function will generate random positions for &lt;code&gt;num_points&lt;/code&gt; distributed over the surface of a disc with the given &lt;code&gt;disc_radius&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;random_disc_jitter &amp;lt;- function(num_points,
                                disc_radius,
@@ -107,7 +107,7 @@ head(tsne_dims)&lt;/code&gt;&lt;/pre&gt;
                  color = cluster_color)) +
   scale_color_identity() +
   theme_void()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2017-12-31-gganimate-ing-a-tsne-plot_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;480&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-12-31-gganimate-tweenr-tsne-plot_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;480&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;For the final state in the animation, I’d like the points to gather around their cluster centroids. A nice way to densely pack points is with &lt;a href=&#34;https://en.wikipedia.org/wiki/Fermat%27s_spiral&#34;&gt;Fermat’s spiral&lt;/a&gt;. Thanks to a &lt;a href=&#34;https://stackoverflow.com/questions/26141237/how-to-create-phyllotaxis-spirals-with-r/28309226#28309226&#34;&gt;StackOverflow reply&lt;/a&gt; by user &lt;a href=&#34;https://stackoverflow.com/users/4526127/manish-nag&#34;&gt;Manish Nag&lt;/a&gt;, I was able to write a function to arrange points along this spiral.&lt;/p&gt;
 &lt;p&gt;This function will generate coordinates for &lt;code&gt;num_points&lt;/code&gt; around a central position (&lt;code&gt;center_x&lt;/code&gt; and &lt;code&gt;center_y&lt;/code&gt;), and return x and y coordinates for spiral positioning in a circle with radius supplied by the &lt;code&gt;size&lt;/code&gt; argument. I’ll use this to generate positions for the third phase of the plot, which gathers the points around the centroid for each cluster.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;fermat_jitter &amp;lt;- function(num_points, 
@@ -175,7 +175,7 @@ head(tsne_dims)&lt;/code&gt;&lt;/pre&gt;
                  color = cluster_color)) +
   scale_color_identity() +
   theme_void()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2017-12-31-gganimate-ing-a-tsne-plot_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;480&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-12-31-gganimate-tweenr-tsne-plot_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;480&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;For &lt;em&gt;gganimate&lt;/em&gt; and &lt;em&gt;tweenr&lt;/em&gt;, I’ll need these to be separate data frames with matching column names.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;state_1 &amp;lt;- data.frame(x = tsne_dims$random_x,
                       y = tsne_dims$random_y,
