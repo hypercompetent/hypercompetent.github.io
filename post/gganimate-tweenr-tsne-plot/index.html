@@ -368,7 +368,7 @@ head(tsne_dims)</code></pre>
   golden_ratio &lt;- (sqrt(5) + 1) / 2
   fibonacci_angle &lt;- 360 / (golden_ratio ^ 2)
   
-  circle_r &lt;- sqrt(size / num_points)
+  ci &lt;- sqrt(size / num_points)
   
   x &lt;- rep(center_x, num_points)
   y &lt;- rep(center_y, num_points)
@@ -376,7 +376,7 @@ head(tsne_dims)</code></pre>
   
   for (m in 1:(num_points - 1)) {
     n &lt;- m - 1
-    r &lt;- circle_r * sqrt(n)
+    r &lt;- ci * sqrt(n)
     theta &lt;- fibonacci_angle * (n)
     x[n] &lt;- center_x + r * cos(theta)
     y[n] &lt;- center_y + r * sin(theta)
