@@ -6,7 +6,7 @@
     <description>Recent content in The Plottery Barn on The Plottery Barn</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; 2018</copyright>
+    <copyright>2018</copyright>
     <lastBuildDate>Wed, 20 Apr 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
@@ -16,11 +16,11 @@
       <pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>/post/gganimate-tweenr-tsne-plot/</guid>
-      <description>&lt;p&gt;I recently posted a GIF of our &lt;a href=&#34;https://www.biorxiv.org/content/early/2017/12/06/229542&#34;&gt;new transcriptomics clustering&lt;/a&gt; in the form of a tSNE plot, which appears to resolve from a cloud of random points into a nice, orderly structure:&lt;/p&gt;
+      <description>&lt;p&gt;I recently posted a GIF of our &lt;a href=&#34;https://www.biorxiv.org/content/early/2017/12/06/229542&#34;&gt;new transcriptomics clustering&lt;/a&gt; in the form of a tSNE plot, which appears to resolve from a cloud of random points into a nice, orderly structure. Below, I’ll show how this was built with the help of &lt;em&gt;gganimate&lt;/em&gt;, &lt;em&gt;tweenr&lt;/em&gt;, and of course &lt;em&gt;ggplot2&lt;/em&gt; in R.&lt;/p&gt;
 &lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Fun with gganimate and tweenr while I wait for our ms to get through &lt;a href=&#34;https://twitter.com/biorxivpreprint?ref_src=twsrc%5Etfw&#34;&gt;@biorxivpreprint&lt;/a&gt; screening. &lt;a href=&#34;https://twitter.com/hashtag/rstats?src=hash&amp;amp;ref_src=twsrc%5Etfw&#34;&gt;#rstats&lt;/a&gt; &lt;a href=&#34;https://twitter.com/hashtag/gganimate?src=hash&amp;amp;ref_src=twsrc%5Etfw&#34;&gt;#gganimate&lt;/a&gt; &lt;a href=&#34;https://twitter.com/hashtag/tsne?src=hash&amp;amp;ref_src=twsrc%5Etfw&#34;&gt;#tsne&lt;/a&gt; &lt;a href=&#34;https://t.co/5OvRuQGbhw&#34;&gt;pic.twitter.com/5OvRuQGbhw&lt;/a&gt;&lt;/p&gt;&amp;mdash; Lucas Graybuck (@hypercompetent) &lt;a href=&#34;https://twitter.com/hypercompetent/status/938559797925789698?ref_src=twsrc%5Etfw&#34;&gt;December 7, 2017&lt;/a&gt;&lt;/blockquote&gt;
 &lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
 
-&lt;p&gt;Below, I’ll show how this was built with the help of &lt;em&gt;gganimate&lt;/em&gt;, &lt;em&gt;tweenr&lt;/em&gt;, and of course &lt;em&gt;ggplot2&lt;/em&gt; in R. The main gist of the process is that we need to set up several states for the points to shift between, which the &lt;em&gt;tweenr&lt;/em&gt; package will interpolate to generate all of the positions in each frame, and then the &lt;em&gt;gganimate&lt;/em&gt; package (along with &lt;a href=&#34;https://www.imagemagick.org/&#34;&gt;ImageMagick&lt;/a&gt; if you’d like to make a GIF) can be used to build an animation.&lt;/p&gt;
+&lt;p&gt;The main gist of the process is that we need to set up several states for the points to shift between, which the &lt;em&gt;tweenr&lt;/em&gt; package will interpolate to generate all of the positions in each frame, and then the &lt;em&gt;gganimate&lt;/em&gt; package (along with &lt;a href=&#34;https://www.imagemagick.org/&#34;&gt;ImageMagick&lt;/a&gt; if you’d like to make a GIF) can be used to build an animation.&lt;/p&gt;
 &lt;p&gt;To get started, you’ll need to download &lt;em&gt;gganimate&lt;/em&gt; and &lt;em&gt;tweenr&lt;/em&gt; from Github using the &lt;em&gt;devtools&lt;/em&gt; package:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;if (!require(devtools)) {
     install.packages(&amp;quot;devtools&amp;quot;)
@@ -202,7 +202,7 @@ tweened_states &amp;lt;- tween_states(state_list,
                            y = y)) +
   geom_point(aes(frame = .frame, 
                  color = color), 
-             size = 1) +
+             size = 1.5) +
   scale_color_identity() +
   theme_void()&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Warning: Ignoring unknown aesthetics: frame&lt;/code&gt;&lt;/pre&gt;
@@ -213,9 +213,9 @@ tweened_states &amp;lt;- tween_states(state_list,
                         sep = &amp;quot;;&amp;quot;))
 
 gganimate(tweened_plot, 
-          &amp;quot;tsne_to_centroids.gif&amp;quot;, 
-          ani.width = 300, 
-          ani.height = 300, 
+          &amp;quot;tsne_to_centroids_twitter.gif&amp;quot;, 
+          ani.width = 506, 
+          ani.height = 506, 
           interval = 1/8, 
           title_frame = F)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Executing: 
@@ -239,8 +239,8 @@ gganimate(tweened_plot,
 ##     Rplot84.png Rplot85.png Rplot86.png Rplot87.png Rplot88.png
 ##     Rplot89.png Rplot90.png Rplot91.png Rplot92.png Rplot93.png
 ##     Rplot94.png Rplot95.png Rplot96.png Rplot97.png Rplot98.png
-##     Rplot99.png Rplot100.png &amp;quot;tsne_to_centroids.gif&amp;quot;&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Output at: tsne_to_centroids.gif&lt;/code&gt;&lt;/pre&gt;
+##     Rplot99.png Rplot100.png &amp;quot;tsne_to_centroids_twitter.gif&amp;quot;&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Output at: tsne_to_centroids_twitter.gif&lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&#34;figure&#34;&gt;
 &lt;img src=&#34;../../files/images/tsne_to_centroids.gif&#34; /&gt;
 

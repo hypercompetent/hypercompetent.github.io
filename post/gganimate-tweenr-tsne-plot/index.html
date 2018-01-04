@@ -266,11 +266,11 @@
 
 
       <div class="article-style" itemprop="articleBody">
-        <p>I recently posted a GIF of our <a href="https://www.biorxiv.org/content/early/2017/12/06/229542">new transcriptomics clustering</a> in the form of a tSNE plot, which appears to resolve from a cloud of random points into a nice, orderly structure:</p>
+        <p>I recently posted a GIF of our <a href="https://www.biorxiv.org/content/early/2017/12/06/229542">new transcriptomics clustering</a> in the form of a tSNE plot, which appears to resolve from a cloud of random points into a nice, orderly structure. Below, I’ll show how this was built with the help of <em>gganimate</em>, <em>tweenr</em>, and of course <em>ggplot2</em> in R.</p>
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Fun with gganimate and tweenr while I wait for our ms to get through <a href="https://twitter.com/biorxivpreprint?ref_src=twsrc%5Etfw">@biorxivpreprint</a> screening. <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> <a href="https://twitter.com/hashtag/gganimate?src=hash&amp;ref_src=twsrc%5Etfw">#gganimate</a> <a href="https://twitter.com/hashtag/tsne?src=hash&amp;ref_src=twsrc%5Etfw">#tsne</a> <a href="https://t.co/5OvRuQGbhw">pic.twitter.com/5OvRuQGbhw</a></p>&mdash; Lucas Graybuck (@hypercompetent) <a href="https://twitter.com/hypercompetent/status/938559797925789698?ref_src=twsrc%5Etfw">December 7, 2017</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-<p>Below, I’ll show how this was built with the help of <em>gganimate</em>, <em>tweenr</em>, and of course <em>ggplot2</em> in R. The main gist of the process is that we need to set up several states for the points to shift between, which the <em>tweenr</em> package will interpolate to generate all of the positions in each frame, and then the <em>gganimate</em> package (along with <a href="https://www.imagemagick.org/">ImageMagick</a> if you’d like to make a GIF) can be used to build an animation.</p>
+<p>The main gist of the process is that we need to set up several states for the points to shift between, which the <em>tweenr</em> package will interpolate to generate all of the positions in each frame, and then the <em>gganimate</em> package (along with <a href="https://www.imagemagick.org/">ImageMagick</a> if you’d like to make a GIF) can be used to build an animation.</p>
 <p>To get started, you’ll need to download <em>gganimate</em> and <em>tweenr</em> from Github using the <em>devtools</em> package:</p>
 <pre class="r"><code>if (!require(devtools)) {
     install.packages(&quot;devtools&quot;)
@@ -452,7 +452,7 @@ tweened_states &lt;- tween_states(state_list,
                            y = y)) +
   geom_point(aes(frame = .frame, 
                  color = color), 
-             size = 1) +
+             size = 1.5) +
   scale_color_identity() +
   theme_void()</code></pre>
 <pre><code>## Warning: Ignoring unknown aesthetics: frame</code></pre>
@@ -463,9 +463,9 @@ tweened_states &lt;- tween_states(state_list,
                         sep = &quot;;&quot;))
 
 gganimate(tweened_plot, 
-          &quot;tsne_to_centroids.gif&quot;, 
-          ani.width = 300, 
-          ani.height = 300, 
+          &quot;tsne_to_centroids_twitter.gif&quot;, 
+          ani.width = 506, 
+          ani.height = 506, 
           interval = 1/8, 
           title_frame = F)</code></pre>
 <pre><code>## Executing: 
@@ -489,8 +489,8 @@ gganimate(tweened_plot,
 ##     Rplot84.png Rplot85.png Rplot86.png Rplot87.png Rplot88.png
 ##     Rplot89.png Rplot90.png Rplot91.png Rplot92.png Rplot93.png
 ##     Rplot94.png Rplot95.png Rplot96.png Rplot97.png Rplot98.png
-##     Rplot99.png Rplot100.png &quot;tsne_to_centroids.gif&quot;&quot;</code></pre>
-<pre><code>## Output at: tsne_to_centroids.gif</code></pre>
+##     Rplot99.png Rplot100.png &quot;tsne_to_centroids_twitter.gif&quot;&quot;</code></pre>
+<pre><code>## Output at: tsne_to_centroids_twitter.gif</code></pre>
 <div class="figure">
 <img src="../../files/images/tsne_to_centroids.gif" />
 
@@ -697,7 +697,7 @@ gganimate(tweened_plot,
   <div class="container">
     <p class="powered-by">
 
-      &copy; 2018 &middot; 
+      2018 &middot; 
 
       Powered by the
       <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
