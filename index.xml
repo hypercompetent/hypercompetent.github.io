@@ -16,7 +16,8 @@
       <pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>/post/gganimate-tweenr-tsne-plot/</guid>
-      <description>&lt;p&gt;I recently posted a GIF of our &lt;a href=&#34;https://www.biorxiv.org/content/early/2017/12/06/229542&#34;&gt;new transcriptomics clustering&lt;/a&gt; in the form of a tSNE plot, which appears to resolve from a cloud of random points into a nice, orderly structure. Below, I’ll show how this was built with the help of &lt;em&gt;gganimate&lt;/em&gt;, &lt;em&gt;tweenr&lt;/em&gt;, and of course &lt;em&gt;ggplot2&lt;/em&gt; in R.&lt;/p&gt;
+      <description>&lt;p&gt;&lt;a href=&#34;#code&#34;&gt;{All Code}&lt;/a&gt; &lt;a href=&#34;#session&#34;&gt;{Session Info}&lt;/a&gt; &lt;a href=&#34;#updates&#34;&gt;{Updates}&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I recently posted a GIF of our &lt;a href=&#34;https://www.biorxiv.org/content/early/2017/12/06/229542&#34;&gt;new transcriptomics clustering&lt;/a&gt; in the form of a tSNE plot, which appears to resolve from a cloud of random points into a nice, orderly structure. Below, I’ll show how this was built with the help of &lt;em&gt;gganimate&lt;/em&gt;, &lt;em&gt;tweenr&lt;/em&gt;, and of course &lt;em&gt;ggplot2&lt;/em&gt; in R.&lt;/p&gt;
 &lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Fun with gganimate and tweenr while I wait for our ms to get through &lt;a href=&#34;https://twitter.com/biorxivpreprint?ref_src=twsrc%5Etfw&#34;&gt;@biorxivpreprint&lt;/a&gt; screening. &lt;a href=&#34;https://twitter.com/hashtag/rstats?src=hash&amp;amp;ref_src=twsrc%5Etfw&#34;&gt;#rstats&lt;/a&gt; &lt;a href=&#34;https://twitter.com/hashtag/gganimate?src=hash&amp;amp;ref_src=twsrc%5Etfw&#34;&gt;#gganimate&lt;/a&gt; &lt;a href=&#34;https://twitter.com/hashtag/tsne?src=hash&amp;amp;ref_src=twsrc%5Etfw&#34;&gt;#tsne&lt;/a&gt; &lt;a href=&#34;https://t.co/5OvRuQGbhw&#34;&gt;pic.twitter.com/5OvRuQGbhw&lt;/a&gt;&lt;/p&gt;&amp;mdash; Lucas Graybuck (@hypercompetent) &lt;a href=&#34;https://twitter.com/hypercompetent/status/938559797925789698?ref_src=twsrc%5Etfw&#34;&gt;December 7, 2017&lt;/a&gt;&lt;/blockquote&gt;
 &lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
 
@@ -32,11 +33,11 @@ if (!require(tweenr)) {
   devtools::install_github(&amp;quot;thomasp85/tweenr&amp;quot;)
 }&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;In addition to these packages, I’ll also use &lt;em&gt;dplyr&lt;/em&gt; for data manipulation, &lt;em&gt;ggplot2&lt;/em&gt; for plotting, and &lt;em&gt;data.table&lt;/em&gt; to quickly read the data from .csv.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dplyr)
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(data.table)
+library(dplyr)
 library(ggplot2)
 library(gganimate)
-library(tweenr)
-library(data.table)&lt;/code&gt;&lt;/pre&gt;
+library(tweenr)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;In this demo, I’ll be starting with tSNE coordinates and cluster labels for each point that we’ve generated previously. These can be retrieved from Github:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tsne_dims &amp;lt;- fread(&amp;quot;https://github.com/hypercompetent/plottery_barn_data/raw/master/gganimate-tweenr-tsne-plot/tsne_dims.csv&amp;quot;)
 
@@ -218,34 +219,13 @@ gganimate(tweened_plot,
           ani.height = 506, 
           interval = 1/8, 
           title_frame = F)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Executing: 
-## &amp;quot;convert -loop 0 -delay 12.5 Rplot1.png Rplot2.png Rplot3.png
-##     Rplot4.png Rplot5.png Rplot6.png Rplot7.png Rplot8.png
-##     Rplot9.png Rplot10.png Rplot11.png Rplot12.png Rplot13.png
-##     Rplot14.png Rplot15.png Rplot16.png Rplot17.png Rplot18.png
-##     Rplot19.png Rplot20.png Rplot21.png Rplot22.png Rplot23.png
-##     Rplot24.png Rplot25.png Rplot26.png Rplot27.png Rplot28.png
-##     Rplot29.png Rplot30.png Rplot31.png Rplot32.png Rplot33.png
-##     Rplot34.png Rplot35.png Rplot36.png Rplot37.png Rplot38.png
-##     Rplot39.png Rplot40.png Rplot41.png Rplot42.png Rplot43.png
-##     Rplot44.png Rplot45.png Rplot46.png Rplot47.png Rplot48.png
-##     Rplot49.png Rplot50.png Rplot51.png Rplot52.png Rplot53.png
-##     Rplot54.png Rplot55.png Rplot56.png Rplot57.png Rplot58.png
-##     Rplot59.png Rplot60.png Rplot61.png Rplot62.png Rplot63.png
-##     Rplot64.png Rplot65.png Rplot66.png Rplot67.png Rplot68.png
-##     Rplot69.png Rplot70.png Rplot71.png Rplot72.png Rplot73.png
-##     Rplot74.png Rplot75.png Rplot76.png Rplot77.png Rplot78.png
-##     Rplot79.png Rplot80.png Rplot81.png Rplot82.png Rplot83.png
-##     Rplot84.png Rplot85.png Rplot86.png Rplot87.png Rplot88.png
-##     Rplot89.png Rplot90.png Rplot91.png Rplot92.png Rplot93.png
-##     Rplot94.png Rplot95.png Rplot96.png Rplot97.png Rplot98.png
-##     Rplot99.png Rplot100.png &amp;quot;tsne_to_centroids_twitter.gif&amp;quot;&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Output at: tsne_to_centroids_twitter.gif&lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&#34;figure&#34;&gt;
 &lt;img src=&#34;../../files/images/tsne_to_centroids.gif&#34; /&gt;
 
 &lt;/div&gt;
 &lt;p&gt;And that’s it! Note that the plot can be made smoother and clearer by making a larger version (increase &lt;code&gt;nframes&lt;/code&gt; in &lt;code&gt;tween_states()&lt;/code&gt;, and increase &lt;code&gt;ani.width&lt;/code&gt; and &lt;code&gt;ani.height&lt;/code&gt; in &lt;code&gt;gganimate()&lt;/code&gt;) at the expense of more time to generate the additional frames, and a larger final file size.&lt;/p&gt;
+&lt;div id=&#34;code&#34; class=&#34;section level5&#34;&gt;
+&lt;h5&gt;All Code&lt;/h5&gt;
 &lt;p&gt;Below is all of the code together in one section.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dplyr)
 library(ggplot2)
@@ -406,6 +386,46 @@ gganimate(tweened_plot,
           ani.height = 300, 
           interval = 1/8, 
           title_frame = F)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;session&#34; class=&#34;section level5&#34;&gt;
+&lt;h5&gt;Session Info&lt;/h5&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sessionInfo()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## R version 3.4.3 (2017-11-30)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 10 x64 (build 16299)
+## 
+## Matrix products: default
+## 
+## locale:
+## [1] LC_COLLATE=English_United States.1252 
+## [2] LC_CTYPE=English_United States.1252   
+## [3] LC_MONETARY=English_United States.1252
+## [4] LC_NUMERIC=C                          
+## [5] LC_TIME=English_United States.1252    
+## 
+## attached base packages:
+## [1] methods   stats     graphics  grDevices utils     datasets  base     
+## 
+## other attached packages:
+## [1] bindrcpp_0.2         tweenr_0.1.5.9999    gganimate_0.1.0.9000
+## [4] ggplot2_2.2.1        dplyr_0.7.4          data.table_1.10.4-3 
+## 
+## loaded via a namespace (and not attached):
+##  [1] Rcpp_0.12.14     pillar_1.0.1     compiler_3.4.3   plyr_1.8.4      
+##  [5] bindr_0.1        tools_3.4.3      digest_0.6.13    evaluate_0.10.1 
+##  [9] tibble_1.4.1     gtable_0.2.0     pkgconfig_2.0.1  rlang_0.1.6     
+## [13] cli_1.0.0        curl_3.1         yaml_2.1.16      blogdown_0.4    
+## [17] stringr_1.2.0    knitr_1.18       rprojroot_1.3-1  grid_3.4.3      
+## [21] glue_1.2.0       R6_2.2.2         rmarkdown_1.8    bookdown_0.5    
+## [25] magrittr_1.5     backports_1.1.2  scales_0.5.0     htmltools_0.3.6 
+## [29] assertthat_0.2.0 colorspace_1.3-2 labeling_0.3     utf8_1.1.2      
+## [33] stringi_1.1.6    lazyeval_0.2.1   munsell_0.4.3    crayon_1.3.4&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;updates&#34; class=&#34;section level5&#34;&gt;
+&lt;h5&gt;Updates&lt;/h5&gt;
+&lt;p&gt;2017-01-07: Added section links to the top of the page.&lt;/p&gt;
+&lt;p&gt;2017-12-31: First version&lt;/p&gt;
+&lt;/div&gt;
 </description>
     </item>
     
